@@ -1,29 +1,71 @@
 import TableHeader from "../TableHeader/TableHeader"
 import TableEntry from "../TableEntry/TableEntry"
-import { useEffect, useState } from "react"
+import { ICryptoEntry } from "../../shared/interfaces"
+import TablePagination from "../TablePagination/Pagination"
+import { useState, useEffect } from "react";
 
-export default function Table() {
-    const [data,setData] = useState(null);
 
-    useEffect(() => {
-        const apiURL = "https://min-api.cryptocompare.com/data/v2/histoday?fsym=BTC&tsym=USD&limit=100&api_key=73ceadae3d50a7818a4695289692bd0711180c3bc331c3425fdb8aa1094b66c1"
- 
-        fetch(apiURL)
-        .then((res) => res.json())
-        .then((data) => {
-            setData(data)
-        })
-    }, [])
+interface Props {
+    entries: [ICryptoEntry],
+    pageLimit: number
+}
+
+
+export default function Table({entries, pageLimit}: Props) {
+    const [index,setIndex] = useState(0);
+    
+    let pages = []
+    for (let index = 0; index < entries.length; index+=pageLimit) {
+        pages.push(entries.slice(index,index+pageLimit));
+    }
+    
+    const pageCount = pages.length;
+    
+    function incrementIndex(){
+        if (index == pages.length-1) {
+            resetIndex();
+        } else  setIndex(index+1)
+
+    }
+
+    function decrementIndex(){
+        if (index == 0){ 
+            maxIndex();
+        } else setIndex(index-1)
+    }
+
+    function resetIndex(){
+        setIndex(0)
+    }
+
+    function maxIndex(){
+        setIndex(pages.length-1)
+    }
+
 
     return(
-        <table>
-            <p>{data}</p>
-        </table>            
-
+        <div>
+    
+            <div>
+                <button onClick={() => resetIndex()}>First</button>    
+                <button onClick={() => decrementIndex()}>Previous</button>
+                <span>Page {index+1} of {pageCount}</span>
+                <button onClick={() => incrementIndex()}>Next</button>    
+                <button onClick={() => maxIndex()}>Last</button>        
+            </div>    
+            
+            <table>
+                <caption>Showing {pageLimit} results per page</caption>
+                <TableHeader/>
+                <tbody>
+                {pages[index].map((entry) => (
+                    <TableEntry key={entry.time} data={entry}/>    
+                    ))
+                }     
+                </tbody>
+                <tfoot>
+                </tfoot>
+            </table>     
+            </div>       
     )
-  // Fetch data from external API
- 
-
-  // Pass data to the page via props
-  return { props: { data } }
 }

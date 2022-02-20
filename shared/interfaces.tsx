@@ -1,25 +1,25 @@
 export interface ICryptoEntry {
-    date: Number,
-    high: Number,
-    low: Number,
-    open: Number,
-    volumeFrom: Number,
-    volumeTo: Number,
-    close:Number,
-    conversionType: String,
-    coneversionSymbol: String
+    time: number,
+    high: number,
+    low: number,
+    open: number,
+    volumeFrom: number,
+    volumeTo: number,
+    close:number,
+    conversionType: string,
+    conversionSymbol: string
 }
 
 export interface ICryptoData {
-        response: String,
-        message: String,
-        hasWarning: Boolean,
-        Type: Number,
-        RateLimit: Object,
+        Response: string,
+        Message: string,
+        HasWarning: boolean,
+        Type: number,
+        RateLimit: {},
         Data: { 
-            aggregated: Boolean,
-            timeFrom: Number,
-            timeTo:Number,
-            List: [ICryptoEntry]
+            Aggregated: boolean,
+            TimeFrom: number,
+            TimeTo:number,
+            Data: [ICryptoEntry]
         }
 }
