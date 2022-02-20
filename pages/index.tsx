@@ -22,6 +22,7 @@ export default function Home({data}:Props){
 
       <main className={styles.main}>
 
+        <h1>Bitcoin History</h1>
         <Table entries={entryList} pageLimit={20} />
 
       </main>

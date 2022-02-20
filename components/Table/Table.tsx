@@ -1,9 +1,8 @@
 import TableHeader from "../TableHeader/TableHeader"
 import TableEntry from "../TableEntry/TableEntry"
 import { ICryptoEntry } from "../../shared/interfaces"
-import TablePagination from "../TablePagination/Pagination"
 import { useState, useEffect } from "react";
-
+import Styles from "./Table.module.scss"
 
 interface Props {
     entries: [ICryptoEntry],
@@ -42,11 +41,9 @@ export default function Table({entries, pageLimit}: Props) {
         setIndex(pages.length-1)
     }
 
-
     return(
-        <div>
-    
-            <div>
+        <div className={Styles.container}> 
+            <div className={Styles.controls}>
                 <button onClick={() => resetIndex()}>First</button>    
                 <button onClick={() => decrementIndex()}>Previous</button>
                 <span>Page {index+1} of {pageCount}</span>
@@ -54,8 +51,8 @@ export default function Table({entries, pageLimit}: Props) {
                 <button onClick={() => maxIndex()}>Last</button>        
             </div>    
             
-            <table>
-                <caption>Showing {pageLimit} results per page</caption>
+            <table className={Styles.table}>
+                <caption>Showing max {pageLimit} results per page</caption>
                 <TableHeader/>
                 <tbody>
                 {pages[index].map((entry) => (

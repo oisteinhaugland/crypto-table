@@ -1,0 +1,39 @@
+.container {
+    height: 100%;
+    margin:2em 0;
+
+
+}
+
+.table {
+    width: 100%;
+    margin: 1em 0;
+    padding: 2em;
+    border-radius: 20px;
+    border:1px solid #333;
+    box-shadow: 12px 16px 19px -8px rgba(0, 0, 0, 0.5);
+    -webkit-box-shadow: 12px 16px 19px -8px rgba(0, 0, 0, 0.5);
+
+
+    width:100%;
+    margin: 1em 0;
+    caption {
+        margin: 1em 0;
+    }
+}
+
+.controls {
+    width: 100%;
+    display:flex;
+    justify-content: space-around;
+    font-size: 1.2em;
+    align-items: center;
+
+    
+    button {
+        background-color: white;
+        border-radius: 5px;
+        padding: 0.3em;
+        text-decoration: none;
+    }
+}

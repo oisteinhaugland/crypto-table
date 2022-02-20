@@ -1,6 +1,8 @@
+import Styles from "./TableHeader.module.scss"
+
 export default function TableHeader(){
     return(
-        <thead>
+        <thead className={Styles.theader}>
             <tr>
                 <th>Date</th>
                 <th>Open</th>
